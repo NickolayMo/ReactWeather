@@ -8,6 +8,10 @@ import Weather from './components/Weather';
 import Example from  './components/Example';
 import About from './components/About';
 
+require('style!css!foundation-sites/dist/css/foundation.min.css');
+$(document).foundation();
+require('style!css!appStyles');
+
 ReactDOM.render(
     <Router history={hashHistory}>
         <Route path="/" component={Main}>

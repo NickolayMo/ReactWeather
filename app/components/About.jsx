@@ -5,9 +5,11 @@ import React from 'react';
 class About extends React.Component{
     render(){
         return (
-            <h3>
-                About component
-            </h3>
+            <div>
+                <div className="text-center">
+                <p>This is test app for React course</p>
+                </div>
+            </div>
         );
     }
 }

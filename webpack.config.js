@@ -1,14 +1,24 @@
 'use strict';
+var webpack = require('webpack');
 module.exports = {
-    context: __dirname + '/app',
-    entry: './app',
+    entry: [
+        'script!jquery/dist/jquery.min.js',
+        'script!foundation-sites/dist/js/foundation.min.js',
+        './app/app'
+    ],
+    externals: {
+        jquery: 'jQuery'
+    },
     output: {
         path: __dirname + '/public',
         filename: 'bundle.js'
     },
     resolve:{
         root: __dirname,
-        extensions: ['', '.js', '.jsx']
+        extensions: ['', '.js', '.jsx'],
+        alias:{
+            appStyles: 'app/styles/app.css'
+        }
 
     },
     module:{
@@ -19,6 +29,14 @@ module.exports = {
                 loader: 'babel-loader'
             }
         ]
-    }
+    },
+    plugins:[
+        new webpack.ProvidePlugin({
+            '$': 'jquery',
+            'jQuery': 'jquery'
+        })
+    ],
+
+
 
 };

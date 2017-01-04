@@ -4,12 +4,14 @@ import React from 'react';
 import Form from './weather/Form';
 import Message from './weather/Message';
 import openWeatherMap from '../api/openWeatherMap';
+import ErrorModal from  './ErrorModal';
 
 class Weather extends React.Component {
     constructor(props){
         super(props);
         this.state ={
-            isLoading:false
+            isLoading:false,
+            errorText:undefined
         };
         this.handleSearch = this.handleSearch.bind(this);
     }
@@ -21,39 +23,52 @@ class Weather extends React.Component {
                 that.setState({
                     location:location,
                     temp: temp,
-                    isLoading:false
+                    isLoading:false,
+                    errorText:undefined
                 });
             },
             function (error) {
-                that.setState({isLoading:false});
-                alert(error);
+                that.setState({
+                    isLoading:false,
+                    errorText:error.message,
+                    location:null,
+                    temp: null
+                });
             }
         );
 
     }
 
+
     render() {
-        let {isLoading, location, temp} = this.state;
+        let {isLoading, location, temp, errorText} = this.state;
 
         function renderMessage(){
             if(isLoading){
-                return <h3>Fetching weather</h3>;
+                return <h3 className="text-center">Fetching weather...</h3>;
             }else if(location && temp){
                 return <Message location={location} temp={temp}/>;
             }
 
         }
+        function renderError(){
+            if(typeof errorText === 'string'){
+                return (
+                    <ErrorModal errorText={errorText}/>
+                );
+            }
+        }
 
         return (
             <div>
-                <h1>
+                <h1 className="text-center page-title">
                     Get Weather
                 </h1>
                 <Form onSearch={this.handleSearch}/>
                 {renderMessage()}
+                {renderError()}
+
             </div>
-
-
         );
     }
 }
