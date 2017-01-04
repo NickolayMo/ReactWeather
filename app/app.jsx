@@ -10,7 +10,7 @@ import About from './components/About';
 
 require('style!css!foundation-sites/dist/css/foundation.min.css');
 $(document).foundation();
-require('style!css!appStyles');
+require('style!css!sass!appStyles');
 
 ReactDOM.render(
     <Router history={hashHistory}>

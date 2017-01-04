@@ -11,7 +11,9 @@ class Weather extends React.Component {
         super(props);
         this.state ={
             isLoading:false,
-            errorText:undefined
+            errorText:undefined,
+            location:undefined,
+            temp:undefined
         };
         this.handleSearch = this.handleSearch.bind(this);
     }
@@ -37,6 +39,13 @@ class Weather extends React.Component {
             }
         );
 
+    }
+    componentDidMount(){
+        let location = this.props.location.query.location;
+        if(location && location.length>0){
+            this.handleSearch(location);
+            window.location.hash = '#/'
+        }
     }
 
 

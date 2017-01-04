@@ -17,7 +17,7 @@ module.exports = {
         root: __dirname,
         extensions: ['', '.js', '.jsx'],
         alias:{
-            appStyles: 'app/styles/app.css'
+            appStyles: 'app/styles/app.sass'
         }
 
     },
